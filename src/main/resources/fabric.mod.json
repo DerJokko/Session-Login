@@ -16,7 +16,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"dev.jokko.SessionLogin"
+			"dev.derjokko.SessionLogin"
 		]
 	},
 	"mixins": [

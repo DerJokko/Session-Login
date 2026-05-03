@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "dev.jokko.mixin",
+	"package": "dev.derjokko.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"mixins": [
 		"ExampleMixin"
