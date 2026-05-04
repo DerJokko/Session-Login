@@ -1,18 +1,18 @@
 {
 	"schemaVersion": 1,
-	"id": "session-login",
+	"id": "sessionlogin",
 	"version": "${version}",
-	"name": "Session Login",
-	"description": "A simple fabric mod that allows you to change your current Session-ID (SSID) in Minecraft.",
+	"name": "SessionLogin",
+	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
-		"DerJokko"
+		"Me!"
 	],
 	"contact": {
-		"homepage": "",
-		"sources": "https://github.com/DerJokko/Session-Login"
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/session-login/icon.png",
+	"icon": "assets/sessionlogin/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
@@ -20,12 +20,12 @@
 		]
 	},
 	"mixins": [
-		"session-login.mixins.json"
+		"sessionlogin.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.19.2",
-		"minecraft": "~26.1.2",
-		"java": ">=25",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
 		"fabric-api": "*"
 	}
 }
