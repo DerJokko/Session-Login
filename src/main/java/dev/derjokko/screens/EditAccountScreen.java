@@ -153,6 +153,7 @@ public class EditAccountScreen extends Screen {
                 || super.charTyped(input);
     }
 
+    /*
     @Override
     public boolean mouseClicked(net.minecraft.client.input.Click click, boolean doubleClick) {
         boolean nameFocused = nameField.mouseClicked(click, doubleClick);
@@ -163,4 +164,5 @@ public class EditAccountScreen extends Screen {
 
         return nameFocused || skinFocused || super.mouseClicked(click, doubleClick);
     }
+    */
 }
