@@ -1,7 +1,6 @@
 package dev.derjokko.mixin;
 
 import com.mojang.authlib.minecraft.UserApiService;
-import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import dev.derjokko.SessionLogin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.session.ProfileKeys;
@@ -20,10 +19,6 @@ import java.util.UUID;
 
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin {
-
-    @Shadow
-    @Final
-    private YggdrasilAuthenticationService authenticationService;
 
     @Shadow
     @Final
@@ -57,7 +52,6 @@ public abstract class MinecraftClientMixin {
         UUID currentUuid = currentSession.getUuidOrNull();
         String currentToken = currentSession.getAccessToken();
 
-        // Check if session changed (UUID or token)
         if (lastProfileKeysUuid == null ||
                 !lastProfileKeysUuid.equals(currentUuid) ||
                 lastProfileKeysToken == null ||
@@ -66,21 +60,18 @@ public abstract class MinecraftClientMixin {
             lastProfileKeysUuid = currentUuid;
             lastProfileKeysToken = currentToken;
 
-            SessionLogin.LOGGER.info("Session changed, creating new ProfileKeys for: {}", currentSession.getUsername());
-
             try {
-                // Create a new UserApiService with the new session's token
-                UserApiService userApiService = authenticationService.createUserApiService(currentToken);
+                UserApiService userApiService = UserApiService.OFFLINE;
 
-                // Get the profile keys path
-                Path profileKeysPath = runDirectory.toPath().resolve("profilekeys");
+                Path profileKeysPath =
+                        runDirectory.toPath().resolve("profilekeys");
 
-                // Create new ProfileKeys with the new UserApiService and current session
-                cachedProfileKeys = ProfileKeys.create(userApiService, currentSession, profileKeysPath);
+                cachedProfileKeys = ProfileKeys.create(
+                        userApiService,
+                        currentSession,
+                        profileKeysPath);
 
-                SessionLogin.LOGGER.info("Successfully created new ProfileKeys for: {}", currentSession.getUsername());
             } catch (Exception e) {
-                SessionLogin.LOGGER.error("Failed to create ProfileKeys: {}", e.getMessage());
                 cachedProfileKeys = null;
             }
         }
